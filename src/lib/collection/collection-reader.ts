@@ -1,6 +1,6 @@
 import {Collection} from "./collection";
-import {CardRepository, SnapRepository} from "./snap-repository";
-import {SnapCard} from "./snap-card";
+import {CardRepository, SnapRepository} from "../snapdata/snap-repository";
+import {SnapCard} from "../snapdata/snap-card";
 
 type CollectionCardData = {
     CardDefId: string

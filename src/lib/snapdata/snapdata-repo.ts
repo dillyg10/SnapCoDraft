@@ -20,7 +20,7 @@ export type SnapdataRepo = {
 
 export const readSnapdataRepoAsSnapRepo = (data: string): SnapRepository => {
     const parsed = JSON.parse(data) as SnapdataRepo;
-    const marshalledCards: SnapCard[] = parsed.data.cards.card.filter(card => card.released).map(card => ({
+    const marshalledCards: SnapCard[] = parsed.data.cards.card.filter(card => card.released || card.name === 'Silver Surfer').map(card => ({
         name: card.name.replace(' ','').replace('-','').replace("'", '' +
             '').toLowerCase(),
         text: card.desc,

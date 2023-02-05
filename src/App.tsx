@@ -1,11 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {SnapRepository} from "./lib/snap-repository";
-import {SnapCard} from "./lib/snap-card";
-import {readSnapdataRepoAsSnapRepo} from "./lib/snapdata-repo";
-import {readCollectionFromJSON} from "./lib/collection-reader";
+import {SnapRepository} from "./lib/snapdata/snap-repository";
+import {SnapCard} from "./lib/snapdata/snap-card";
+import {readSnapdataRepoAsSnapRepo} from "./lib/snapdata/snapdata-repo";
+import {readCollectionFromJSON} from "./lib/collection/collection-reader";
 import collectionData from "./CollectionState.json";
+import {inverseCollection, marshallCollection} from "./lib/collection/collection";
+import {createDraftToken, marshallDraftToken, unmarshallDraftToken} from "./lib/draft/draft-token";
+import LZString from "lz-string";
 
 const SNAP_REPO_URL = 'https://snapdata.stonedonkey.com/data/snap.json';
 function App() {
@@ -27,7 +30,11 @@ function App() {
     if (repository) {
       // console.log(JSON.stringify(repository));
       const collection = readCollectionFromJSON(JSON.stringify(collectionData), repository);
-      console.log(JSON.stringify(collection));
+      const draftToken = createDraftToken(collection, repository);
+      const marshalledToken = marshallDraftToken(draftToken);
+      const unmarshalledToken = unmarshallDraftToken(marshalledToken);
+      console.log(JSON.stringify(draftToken));
+      console.log(JSON.stringify(unmarshalledToken));
     }
   }, [repository])
 
