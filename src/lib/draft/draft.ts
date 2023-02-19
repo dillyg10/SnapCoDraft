@@ -67,6 +67,7 @@ export abstract class Draft {
         const cardNumber = this.rng.int(0, this.draftPool.length);
         const card = this.draftPool[cardNumber];
         this.draftPool = [...this.draftPool.slice(0, cardNumber), ...this.draftPool.slice(cardNumber + 1)];
+        console.log(JSON.stringify(card));
         return card;
     }
 }

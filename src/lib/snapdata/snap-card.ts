@@ -1,4 +1,4 @@
-export const SNAPDATA_IMAGE = (id: string) => `https://snapdata.stonedonkey.com/images/cards/${id}.webp`;
+export const SNAPDATA_IMAGE = (id: string) => `https://snapdata-cdn.stonedonkey.com/images/cards/${id}.webp`;
 export const SNAPPRO_IMAGE = (id: string) => `https://static.marvelsnap.pro/cards/${id}.webp`;
 
 export type SnapCard = {

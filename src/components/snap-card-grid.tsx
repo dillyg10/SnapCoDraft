@@ -1,19 +1,32 @@
 import {SnapCard} from "../lib/snapdata/snap-card";
 import { GridProps } from "@chakra-ui/layout/dist/grid";
 import {Grid, GridItem} from "@chakra-ui/react";
-import {SnapCardComponent} from "./snap-card-component";
+import {SnapCardComponent, SnapCardComponentProps} from "./snap-card-component";
 import React from "react";
 
-export type SnapCardGridProps = { cards: (SnapCard | undefined)[] } & GridProps;
+export type SnapCardGridProps = {
+    cards: (SnapCard | undefined)[],
+    totalcards?: number
+    cardclickedaction?: (card: SnapCard, index: number) => void,
+    cardcomponentprops?: Partial<SnapCardComponentProps>
+} & GridProps;
 export const SnapCardGrid = ( props: SnapCardGridProps ) => {
+    const cardsFitToLength = [...props.cards, ...Array((props.totalcards ?? props.cards.length ) - props.cards.length).fill(undefined)]
     return <Grid
+        height='100%'
+        maxHeight='100%'
         {...props}
     >
-        {props.cards.map((card, index) => {
+        {cardsFitToLength.map((card, index) => {
             return <GridItem
+                key={index}
                 colSpan={1}
             >
-                <SnapCardComponent card={card}/>
+                <SnapCardComponent card={card} onClick={() => {
+                    if(props.cardclickedaction){
+                        props.cardclickedaction(card, index)
+                    }
+                }} {...props.cardcomponentprops} />
             </GridItem>
         })}
     </Grid>

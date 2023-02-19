@@ -10,10 +10,10 @@ export type DraftToken = {
     collectionIds: number[]
 }
 
-export const createDraftToken = (collection: Collection, repo: SnapRepository): DraftToken => {
+export const createDraftToken = (collection: Collection, repo: SnapRepository, seed: string = uuid()): DraftToken => {
     return {
-        seed: uuid(),
-        collectionIds: marshallCollection(inverseCollection(collection, repo))
+        seed,
+        collectionIds: marshallCollection(collection)
     }
 }
 

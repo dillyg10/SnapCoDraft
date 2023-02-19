@@ -15,6 +15,7 @@ export class PickAndGiveDraft extends Draft {
 
     generateNextPick(): PickState {
         const cards = [this.generateCard(), this.generateCard(), this.generateCard(), this.generateCard()];
+        console.log(collectionAsNames(cards));
         if (this.env.host) {
             return {
                 choices: [cards[0], cards[1]]

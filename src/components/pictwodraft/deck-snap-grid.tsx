@@ -9,5 +9,7 @@ export const DeckSnapGrid = (props: SnapCardGridProps) => {
         bg='draft.container.background'
         {...props}
         cards={ props.cards }
+        totalcards={6}
+        dropShadow='50px'
     />
 }

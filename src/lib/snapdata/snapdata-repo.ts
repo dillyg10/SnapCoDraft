@@ -18,14 +18,25 @@ export type SnapdataRepo = {
     }
 }
 
+const replacements = {
+    'Kazar': 'KaZar',
+    'Antman': 'AntMan',
+    'MODOK': 'Modok'
+}
+
+const applyReplacement = (card: string): string => {
+    let fixedCard = card.replace(/[^a-z0-9]/gi, '');
+    for (const [key, value] of Object.entries(replacements)) {
+        fixedCard = fixedCard.replace(key, value);
+    }
+    return fixedCard;
+}
+
 export const readSnapdataRepoAsSnapRepo = (data: string): SnapRepository => {
     const parsed = JSON.parse(data) as SnapdataRepo;
-    // TODO PR to fix KaZar, Ant-Man
-    const marshalledCards: SnapCard[] = parsed.data.cards.card.filter(card => card.released || card.name === 'Silver Surfer').map(card => ({
-        name: card.name.replace(' ','').replace('-','').replace("'", '' +
-            '').toLowerCase(),
-        capitalizedName: card.name.replace(' ','').replace('-','').replace("'", '' +
-            '').replace('Kazar', 'KaZar').replace('Antman', 'AntMan'),
+    const marshalledCards: SnapCard[] = parsed.data.cards.card.filter(card => card.released || card.name === 'MODOK').map(card => ({
+        name: applyReplacement(card.name).toLowerCase(),
+        capitalizedName: applyReplacement(card.name),
         text: card.desc,
         id: card.id,
     }));
