@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import {DraftContext} from "../../contexts/draft-context";
 import {Button, Flex, Spacer, Stack, Text, Textarea} from "@chakra-ui/react";
 import {CopyIcon} from "@chakra-ui/icons";
+import {CopyTextArea} from "../shared/copy-text-area";
 
 export const PostDraftDeckCode = () => {
     const { draft, fullDeck } = useContext(DraftContext);
@@ -14,18 +15,6 @@ export const PostDraftDeckCode = () => {
 
     return <Stack color='white'>
         <Text>Copy code for in-game deck</Text>
-        <Textarea
-            contentEditable={false}
-            value={fullDeckCode}
-            readOnly
-        />
-        <Flex>
-            <Spacer />
-            <Button
-                onClick={() => navigator.clipboard.writeText(fullDeckCode)}
-                colorScheme='blue'>
-                <CopyIcon paddingRight={1}/>Copy Code
-            </Button>
-        </Flex>
+        <CopyTextArea text={fullDeckCode} />
     </Stack>
 }

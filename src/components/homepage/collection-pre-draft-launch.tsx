@@ -6,7 +6,7 @@ import {
     IconButton,
     Input,
     InputGroup, InputRightElement, Modal,
-    ModalBody,
+    ModalBody, ModalCloseButton,
     ModalContent, ModalFooter,
     ModalHeader,
     ModalOverlay,
@@ -16,12 +16,12 @@ import {
 } from "@chakra-ui/react";
 import {UploadCollection} from "./upload-collection";
 import {readCollectionFromJSON} from "../../lib/collection/collection-reader";
-import {CollectionContext} from "../../contexts/collection.context";
+import {CollectionContext} from "../../contexts/collection-context";
 import {CollectionView} from "../collection-view";
 import {CopyIcon} from "@chakra-ui/icons";
 import {DragDropFile} from "../drag-drop-file";
 
-export const CollectionPreDraftLaunch = ({ readyAction, headerText } : { readyAction? : ReactNode, headerText?: string }) => {
+export const CollectionPreDraftLaunch = ({ readyAction, headerText, onCancel } : { readyAction : ReactNode, headerText?: string, onCancel: () => void }) => {
     const { collection, setCollection } = useContext(CollectionContext)
     const { repository } = useContext(RepositoryContext);
 
@@ -36,10 +36,11 @@ export const CollectionPreDraftLaunch = ({ readyAction, headerText } : { readyAc
 
     return <>
         {collection ?
-            <Modal isOpen={true} onClose={() => {}}>
+            <Modal isOpen={true} onClose={onCancel}>
                 <ModalOverlay/>
                 <ModalContent bg='draft.container.background'>
                     <ModalHeader color='white' fontWeight='bold' fontSize='5vh'> {headerText ?? 'Begin draft'} </ModalHeader>
+                    <ModalCloseButton color='white' />
                     <ModalBody>
                             <Stack>
                                 <Text color='white'>Your collection:</Text>
@@ -49,7 +50,7 @@ export const CollectionPreDraftLaunch = ({ readyAction, headerText } : { readyAc
                     <ModalFooter>
                         <ButtonGroup>
                             <Button colorScheme='blue' variant='outline' onClick={() => setCollection(undefined)}> Change Collection </Button>
-                            <Button colorScheme='blue'> Start Draft </Button>
+                            { readyAction }
                         </ButtonGroup>
                     </ModalFooter>
                 </ModalContent>

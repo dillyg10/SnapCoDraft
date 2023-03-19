@@ -3,7 +3,7 @@ import React, {ReactNode, useCallback, useEffect, useState} from "react";
 import repositoryData from "../snap-repo.json";
 import {readSnapdataRepoAsSnapRepo} from "../lib/snapdata/snapdata-repo";
 
-const SNAP_REPO_URL = 'https://snapdata-cdn.stonedonkey.com/data/snap.json';
+const SNAP_REPO_URL = 'https://raw.githubusercontent.com/hansenwebco/snap-data/master/data/snap.json';
 
 export type RepositoryContextProps = {
     repository: SnapRepository | undefined

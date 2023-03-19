@@ -30,7 +30,7 @@ export const UploadCollection = ({ onCollectionUploaded } : { onCollectionUpload
                             <IconButton aria-label='copy' icon={<CopyIcon />} h="1.75rem" size="sm" onClick={() => navigator.clipboard.writeText(path)} />
                         </InputRightElement>
                     </InputGroup>
-                    <DragDropFile onFileUploaded={onCollectionUploaded}/>
+                    <DragDropFile onFileUploaded={onCollectionUploaded} accept=".json"/>
                 </Stack>
             </ModalBody>
             <ModalFooter />

@@ -2,10 +2,12 @@ import {Draft, DraftProps, PickState} from "./draft";
 import {DraftEnv} from "./draft-env";
 import {collectionAsNames} from "../collection/collection";
 
-export class PickAndGiveDraft extends Draft {
+export class PickTwoDraft extends Draft {
 
-    constructor(env: DraftEnv, props: DraftProps) {
-        super(env, props);
+    constructor(env: DraftEnv) {
+        super(env, {
+            maxPickNumber: 6
+        });
     }
 
     cardWasPicked(cardNumber: number): void {

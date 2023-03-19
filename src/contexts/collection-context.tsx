@@ -6,16 +6,22 @@ export const COLLECTION_LOCAL_STORAGE_KEY = 'testcoll';
 
 export type CollectionContextProps = {
     collection: Collection | undefined,
-    setCollection: (collection: Collection | undefined, store?: boolean) => void
+    setCollection: (collection: Collection | undefined, store?: boolean) => void,
+
+    collectionConfirmed: boolean,
+    setCollectionConfirmed: (confirmed: boolean) => void
 }
 
 export const CollectionContext = createContext<CollectionContextProps>({
     collection: undefined,
-    setCollection: () => {}
+    setCollection: () => {},
+    collectionConfirmed: false,
+    setCollectionConfirmed: () => {}
 });
 
 export const CollectionContextBoundary = ({ children } : { children : ReactNode}) => {
     const [collection, setCollection] = useState<Collection>();
+    const [collectionConfirmed, setCollectionConfirmed] = useState<boolean>( false);
     const { repository } = useContext(RepositoryContext);
     const toast = useToast();
 
@@ -55,7 +61,9 @@ export const CollectionContextBoundary = ({ children } : { children : ReactNode}
             }
 
             setCollection(collection);
-        }
+        },
+        collectionConfirmed,
+        setCollectionConfirmed
     }}>
         { children }
     </CollectionContext.Provider>

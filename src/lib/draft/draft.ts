@@ -24,14 +24,15 @@ export type DraftProps = {
 
 export abstract class Draft {
     public draftPool: SnapCard[];
-    public readonly draftState: DraftState;
+    public draftState: DraftState;
     public pickState: PickState;
     public rng: Random;
 
     protected constructor(public readonly env: DraftEnv, public readonly props: DraftProps) {
         // Both collections are "inverse" meaning they are all cards that the players don't own, the card pool is all cards that don't exist in that list
-        const combinedCollectionNames = collectionAsNames([...this.env.playerCollection, ...this.env.opponentsCollection]);
-        this.draftPool = Object.values(this.env.repository.cards.cardsByName).filter(card => !combinedCollectionNames.includes(card.name));
+        this.draftPool = [];
+        this.resetPool()
+        this.rng = random.clone(this.env.seed);
         this.draftState = {
             pickNumber: 0,
             playerDeck: [],
@@ -40,7 +41,6 @@ export abstract class Draft {
         this.pickState = {
             choices: []
         }
-        this.rng = random.clone(this.env.seed);
         this.nextPick();
     }
 
@@ -64,10 +64,30 @@ export abstract class Draft {
     abstract cardWasPicked(cardNumber: number): void;
 
     public generateCard(): SnapCard {
-        const cardNumber = this.rng.int(0, this.draftPool.length);
+        const cardNumber = this.rng.int(0, this.draftPool.length - 1);
+        console.log(this.draftPool.length);
+        console.log(cardNumber);
         const card = this.draftPool[cardNumber];
         this.draftPool = [...this.draftPool.slice(0, cardNumber), ...this.draftPool.slice(cardNumber + 1)];
         console.log(JSON.stringify(card));
         return card;
+    }
+
+    public reset() {
+        this.draftState = {
+            pickNumber: 0,
+            playerDeck: [],
+            opponentDeck: []
+        }
+        this.pickState = {
+            choices: []
+        }
+        this.resetPool();
+        this.nextPick();
+    }
+
+    public resetPool() {
+        const combinedCollectionNames = collectionAsNames([...this.env.playerCollection, ...this.env.opponentsCollection]);
+        this.draftPool = Object.values(this.env.repository.cards.cardsByName).filter(card => !combinedCollectionNames.includes(card.name));
     }
 }

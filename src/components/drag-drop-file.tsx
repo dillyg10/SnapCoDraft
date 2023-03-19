@@ -3,7 +3,7 @@ import React, {useRef, useState} from "react";
 import {Form} from "react-router-dom";
 import {Box, Button, Flex, FormControl, Text, Input, Spacer} from "@chakra-ui/react";
 
-export const DragDropFile = ({ onFileUploaded } : { onFileUploaded : (data: string) => void }) => {
+export const DragDropFile = ({ onFileUploaded, accept } : { onFileUploaded : (data: string) => void, accept?: string }) => {
     const [dragActive, setDragActive] = useState(false);
     const [invalidFile, setInvalidFile] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -53,7 +53,7 @@ export const DragDropFile = ({ onFileUploaded } : { onFileUploaded : (data: stri
     };
 
     return <FormControl border={invalidFile ? '1px solid red' : ''}   bg={dragActive ? 'fileupload.background.active' : 'fileupload.background.inactive' } height='30vh' borderRadius={15} onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()}>
-        <Input ref={inputRef} type='file' onChange={handleChange} hidden />
+        <Input ref={inputRef} type='file' accept={accept ?? "*"} onChange={handleChange} hidden />
         <Box height='100%' onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop} >
             <Flex height='100%' direction='column'>
                 <Spacer />

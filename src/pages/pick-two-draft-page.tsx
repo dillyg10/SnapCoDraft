@@ -17,12 +17,19 @@ import {PlayerPickAreaGrid} from "../components/pictwodraft/player-pick-area-gri
 import {NameTag} from "../components/pictwodraft/name-tag";
 import {PostDraftTradeDeckCodes} from "../components/pictwodraft/post-draft-trade-deck-codes";
 import {PostDraftState} from "../components/pictwodraft/post-draft-state";
+import {useNavigate} from "react-router-dom";
 
 export const PickTwoDraftPage = () => {
     const {draft, finished} = useContext(DraftContext);
-    console.log(JSON.stringify(draft?.pickState));
-
-    if (!draft) return <></>
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!draft) {
+            navigate('/');
+        }
+    }, [draft])
+    if (!draft) {
+        return <></>
+    }
     // onOpen();
 
     return <>

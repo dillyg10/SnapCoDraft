@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {CollectionContext} from "../contexts/collection.context";
+import {CollectionContext} from "../contexts/collection-context";
 import {SnapCardGrid} from "./snap-card-grid";
 import {Box} from "@chakra-ui/react";
 import {RepositoryContext} from "../contexts/repository-context";

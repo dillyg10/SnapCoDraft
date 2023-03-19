@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {DraftContext} from "../../contexts/draft-context";
 import {
+    Button,
     Center,
     Modal,
     ModalBody,
@@ -15,7 +16,7 @@ import {PostDraftDeckCode} from "./post-draft-deck-code";
 import {collectionAsNames} from "../../lib/collection/collection";
 
 export const PostDraftState = () => {
-    const { fullDeck } = useContext(DraftContext);
+    const { fullDeck, redraft } = useContext(DraftContext);
     const [loading, setLoading] = useState<boolean | undefined>(undefined);
 
     useEffect(() => {
@@ -44,7 +45,9 @@ export const PostDraftState = () => {
                         : <PostDraftTradeDeckCodes />)
                 }
             </ModalBody>
-            <ModalFooter />
+            <ModalFooter>
+                {fullDeck && !loading ? <Button colorScheme='blue' onClick={redraft}>Draft Again</Button> : <></>}
+            </ModalFooter>
         </ModalContent>
     </Modal>
 }
