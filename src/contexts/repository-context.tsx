@@ -1,6 +1,6 @@
 import {SnapRepository} from "../lib/snapdata/snap-repository";
 import React, {ReactNode, useCallback, useEffect, useState} from "react";
-import repositoryData from "../snap-repo.json";
+import repositoryData from "../snap.json";
 import {readSnapdataRepoAsSnapRepo} from "../lib/snapdata/snapdata-repo";
 
 const SNAP_REPO_URL = 'https://raw.githubusercontent.com/hansenwebco/snap-data/master/data/snap.json';
