@@ -38,12 +38,12 @@ export const CopyTextArea = ({ text } : { text : string }) => {
         />
         <Flex>
             <Spacer />
-            <Button
+            {/* <Button
                 onClick={() => {
                     console.log(text);
                     copyToClipboard(text);
                 }}
-                colorScheme='blue'><CopyIcon paddingRight={1}/>Copy</Button>
+                colorScheme='blue'><CopyIcon paddingRight={1}/>Copy</Button> */}
         </Flex>
     </>
 
