@@ -3,8 +3,6 @@ import './App.css';
 import {SnapRepository} from "./lib/snapdata/snap-repository";
 import {readSnapdataRepoAsSnapRepo} from "./lib/snapdata/snapdata-repo";
 import {readCollectionFromJSON} from "./lib/collection/collection-reader";
-import collectionData from "./CollectionState.json";
-import repositoryData from "./snap-repo.json";
 import {Collection, collectionAsNames, inverseCollection} from "./lib/collection/collection";
 import {createDraftToken} from "./lib/draft/draft-token";
 import {PickTwoDraft} from "./lib/draft/pick-two-draft";
