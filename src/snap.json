@@ -2368,7 +2368,7 @@
           "power": "0",
           "desc": "On Reveal: Gain +3 Power for each other card you played this turn.",
           "currentImage": true,
-          "released": false,
+          "released": true,
           "draftRarity": 0
         },
         {
