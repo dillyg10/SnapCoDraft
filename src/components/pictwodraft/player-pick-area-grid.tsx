@@ -22,7 +22,7 @@ export const PlayerPickAreaGrid = (props: SnapCardGridProps) => {
             }
         }}
         cardcomponentprops={
-            {showText: true}
+            () => ({showText: true})
         }
     />
 }

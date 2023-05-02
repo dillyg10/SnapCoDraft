@@ -1,10 +1,10 @@
 import {getCardImage, SnapCard} from "../lib/snapdata/snap-card";
-import {Image, Box, Center, ImageProps, Text, Stack} from "@chakra-ui/react";
+import {Image, Box, Center, ImageProps, Text, Stack, BoxProps} from "@chakra-ui/react";
 import React from "react";
 
-export type SnapCardComponentProps = { card?: SnapCard, showText?: boolean, onClick: () => void} ;
-export const SnapCardComponent = ({ card, showText, onClick } : SnapCardComponentProps ) => {
-    return <Box w='100%' h='100%'>
+export type SnapCardComponentProps = { card?: SnapCard, showText?: boolean, onClick: () => void} & BoxProps;
+export const SnapCardComponent = ({ card, showText, onClick, ...other } : SnapCardComponentProps ) => {
+    return <Box w='100%' h='100%' {...other}>
         {
         card ? <Center>
                 <Stack dir='vertical'>

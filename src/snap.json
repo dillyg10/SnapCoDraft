@@ -2363,7 +2363,7 @@
         },
         {
           "id": "197",
-          "name": "Hit-Monkey",
+          "name": "HitMonkey",
           "energy": "2",
           "power": "0",
           "desc": "On Reveal: Gain +3 Power for each other card you played this turn.",

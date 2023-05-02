@@ -30,6 +30,7 @@ import {HomePage} from "./pages/home-page";
 import {RepositoryContextBoundary} from "./contexts/repository-context";
 import {CollectionContextBoundary} from "./contexts/collection-context";
 import {Route, BrowserRouter as Router, Routes, RouterProvider, createBrowserRouter} from "react-router-dom";
+import { MegaDraft } from './pages/mega-draft-page';
 
 const SNAP_REPO_URL = 'https://snapdata-cdn.stonedonkey.com/data/snap.json';
 function App() {
@@ -41,6 +42,10 @@ function App() {
     {
       path: 'draft',
       element: <PickTwoDraftPage />
+    },
+    {
+      path: 'mega',
+      element: <MegaDraft />
     }
   ]);
 
